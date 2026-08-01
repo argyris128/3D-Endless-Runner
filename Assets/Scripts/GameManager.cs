@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
             Instance.CurrObjects = new();
-            Instance.GameSpeed = 10f;
+            Instance.GameSpeed = 12f;
             Instance.increaseSpeedCoroutine = null;
         }
         else
@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             //Debug.Log(Instance.GameSpeed);
-            Instance.GameSpeed += 0.05f;
+            Instance.GameSpeed += 0.08f;
             yield return new WaitForSeconds(1f);
         }
     }
@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour
     {
         Instance.CurrObjects.Clear();
 
-        Instance.GameSpeed = 10f;
+        Instance.GameSpeed = 12f;
 
         PlayerPrefs.DeleteAll();
 

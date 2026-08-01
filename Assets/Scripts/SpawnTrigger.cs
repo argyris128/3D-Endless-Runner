@@ -35,7 +35,7 @@ public class SpawnTrigger : MonoBehaviour
         } else
         {
             minSpawnObstacle = 2f;
-            maxSpawnObstacle = 3.5f;
+            maxSpawnObstacle = 3f;
             minSpawnBuff = 15f;
             maxSpawnBuff = 20f;
             minSpawnCoin = 1.5f;
@@ -56,8 +56,8 @@ public class SpawnTrigger : MonoBehaviour
         while(minSpawnObstacle > 0.5f)
         {
             yield return new WaitForSeconds(1f);
-            minSpawnObstacle -= 0.005f;
-            maxSpawnObstacle -= 0.012f;
+            minSpawnObstacle -= 0.006f;
+            maxSpawnObstacle -= 0.015f;
             minSpawnBuff -= 0.01f;
             maxSpawnBuff -= 0.01f;
             minSpawnCoin -= 0.007f;
@@ -69,8 +69,8 @@ public class SpawnTrigger : MonoBehaviour
     {
         while(true)
         {
-            yield return new WaitForSeconds(Random.Range(minSpawnObstacle, maxSpawnObstacle));
             SpawnObstacle();
+            yield return new WaitForSeconds(Random.Range(minSpawnObstacle, maxSpawnObstacle));          
         }
     }
 

@@ -143,7 +143,7 @@ public class PlayerController : MonoBehaviour
         Vector3 targetScale = new Vector3(1f, 0.5f, 1f);
         StartCoroutine(CrouchAnimation(Vector3.one, targetScale));
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.7f);
 
         StartCoroutine(CrouchAnimation(transform.localScale, Vector3.one));
         rb.AddForce(Vector3.down * 1000f, ForceMode.Acceleration);
