@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
         if (scene.name == "Game")
         {
             Instance.GameIsRunning = true;
+            increaseSpeedCoroutine = StartCoroutine(IncreaseSpeed());
         }
         else if(scene.name == "MainMenu")
         {
@@ -80,21 +81,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        if(PlayerPrefs.HasKey("GameSpeed"))
-            Instance.GameSpeed = PlayerPrefs.GetFloat("GameSpeed");
-
-        if(SceneManager.GetActiveScene().name == "Game")
-            increaseSpeedCoroutine = StartCoroutine(IncreaseSpeed());
-    }
-
     IEnumerator IncreaseSpeed()
     {
         while (true)
         {
             //Debug.Log(Instance.GameSpeed);
-            Instance.GameSpeed += 0.08f;
+            Instance.GameSpeed += 0.07f;
             yield return new WaitForSeconds(1f);
         }
     }
