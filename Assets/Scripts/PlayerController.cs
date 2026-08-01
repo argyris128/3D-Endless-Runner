@@ -85,19 +85,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        /* Vector2 input = Vector2.zero;
-
-        if (controls.Player.Move.IsPressed())
-            input = controls.Player.Move.ReadValue<Vector2>();
-
-        if (SwipeInput.SwipeDirection != Vector2.zero)
-            input = SwipeInput.SwipeDirection;
-
-        controls.Player.Move.performed += ctx =>
-        {
-            
-        }; */
-
         foreach(Transform lane in Lanes)
         {
             lane.position = new Vector3(lane.position.x, transform.position.y, lane.position.z);

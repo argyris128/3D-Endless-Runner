@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Globalization;
 
 public class GameManager : MonoBehaviour
 {
@@ -166,7 +167,10 @@ public class GameManager : MonoBehaviour
                 posZ -= spawnOffset.z;
             }
 
-            saveObjects += pair.id + "." + posX + "." + posY + "." + posZ + ";";   // "id,x,y,z;"
+            saveObjects += pair.id + "," + 
+                posX.ToString(CultureInfo.InvariantCulture) + "," + 
+                posY.ToString(CultureInfo.InvariantCulture) + "," + 
+                posZ.ToString(CultureInfo.InvariantCulture) + ";";   // "id,x,y,z;"
         }
         if(saveObjects != "")
             PlayerPrefs.SetString("Objects", saveObjects);
@@ -203,12 +207,12 @@ public class GameManager : MonoBehaviour
 
             foreach(string row in rows)
             {
-                string[] columns = row.Split('.');
+                string[] columns = row.Split(',');
 
                 int _id = int.Parse(columns[0]);
-                float posX = float.Parse(columns[1]);
-                float posY = float.Parse(columns[2]);
-                float posZ = float.Parse(columns[3]);
+                float posX = float.Parse(columns[1], CultureInfo.InvariantCulture);
+                float posY = float.Parse(columns[2], CultureInfo.InvariantCulture);
+                float posZ = float.Parse(columns[3], CultureInfo.InvariantCulture);
 
                 ObjectIDPair pair = objectIDs.Find(x => x.id == _id);
                 Vector3 pos = new(posX, posY, posZ);
