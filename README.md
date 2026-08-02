@@ -15,3 +15,4 @@
 ### - 3 buffs that give advantages (shield, slow motion, magnet)
 ### - 1 debuff that gives a disadvantage (speed up)
 ### - Increasing difficulty as the game progresses (obstacles become faster and spawn more frequently)
+### - Option to save the game and the current progress
