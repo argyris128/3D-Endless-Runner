@@ -11,7 +11,7 @@
 
 ## Features
 
-# - Coins and trophy that give the player more points
-# - 3 buffs that give advantages (shield, slow motion, magnet)
-# - 1 debuff that gives a disadvantage (speed up)
-# - Increasing difficulty as the game progresses (obstacles become faster and spawn more frequently)
+### - Coins and trophy that give the player more points
+### - 3 buffs that give advantages (shield, slow motion, magnet)
+### - 1 debuff that gives a disadvantage (speed up)
+### - Increasing difficulty as the game progresses (obstacles become faster and spawn more frequently)
