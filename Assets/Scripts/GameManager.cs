@@ -74,6 +74,9 @@ public class GameManager : MonoBehaviour
             Instance.CurrObjects = new();
             Instance.GameSpeed = 12f;
             Instance.increaseSpeedCoroutine = null;
+
+            QualitySettings.vSyncCount = 0;
+            Application.targetFrameRate = 200;
         }
         else
         {
@@ -86,7 +89,7 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             //Debug.Log(Instance.GameSpeed);
-            Instance.GameSpeed += 0.07f;
+            Instance.GameSpeed += 0.03f;
             yield return new WaitForSeconds(1f);
         }
     }
@@ -131,19 +134,37 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetFloat("ScoreInterval", Score.interval);
         PlayerPrefs.SetInt("CurrentLane", playerController.CurrLane);
 
-        PlayerPrefs.SetFloat("minSpawnObstacle", spawnTrigger.minSpawnObstacle);
-        PlayerPrefs.SetFloat("maxSpawnObstacle", spawnTrigger.maxSpawnObstacle);
-        PlayerPrefs.SetFloat("minSpawnBuff", spawnTrigger.minSpawnBuff);
-        PlayerPrefs.SetFloat("maxSpawnBuff", spawnTrigger.maxSpawnBuff);
-        PlayerPrefs.SetFloat("minSpawnCoin", spawnTrigger.minSpawnCoin);
-        PlayerPrefs.SetFloat("maxSpawnCoin", spawnTrigger.maxSpawnCoin);
+        PlayerPrefs.SetFloat("obstacleSpawnTimer", spawnTrigger.obstacleSpawnTimer);
+        PlayerPrefs.SetFloat("buffSpawnTimer", spawnTrigger.buffSpawnTimer);
+        PlayerPrefs.SetFloat("debuffSpawnTimer", spawnTrigger.debuffSpawnTimer);
+        PlayerPrefs.SetFloat("coinSpawnTimer", spawnTrigger.coinSpawnTimer);
+        PlayerPrefs.SetFloat("trophySpawnTimer", spawnTrigger.trophySpawnTimer);
 
-        if(buffsController.SpeedupActive)
-            PlayerPrefs.SetFloat("GameSpeed", Instance.GameSpeed / 1.5f);
-        else if(buffsController.SlowmoActive)
-            PlayerPrefs.SetFloat("GameSpeed", Instance.GameSpeed * 2f);
-        else
+        if(buffsController.SpeedupActive) {
+            PlayerPrefs.SetFloat("GameSpeed", Instance.GameSpeed / 1.4f);
+            PlayerPrefs.SetFloat("minSpawnObstacle", spawnTrigger.minSpawnObstacle * 1.4f);
+            PlayerPrefs.SetFloat("maxSpawnObstacle", spawnTrigger.maxSpawnObstacle * 1.4f);
+            PlayerPrefs.SetFloat("minSpawnBuff", spawnTrigger.minSpawnBuff * 1.4f);
+            PlayerPrefs.SetFloat("maxSpawnBuff", spawnTrigger.maxSpawnBuff * 1.4f);
+            PlayerPrefs.SetFloat("minSpawnCoin", spawnTrigger.minSpawnCoin * 1.4f);
+            PlayerPrefs.SetFloat("maxSpawnCoin", spawnTrigger.maxSpawnCoin * 1.4f);
+        } else if(buffsController.SlowmoActive) {
+            PlayerPrefs.SetFloat("GameSpeed", Instance.GameSpeed * 1.6f);
+            PlayerPrefs.SetFloat("minSpawnObstacle", spawnTrigger.minSpawnObstacle / 1.6f);
+            PlayerPrefs.SetFloat("maxSpawnObstacle", spawnTrigger.maxSpawnObstacle / 1.6f);
+            PlayerPrefs.SetFloat("minSpawnBuff", spawnTrigger.minSpawnBuff / 1.6f);
+            PlayerPrefs.SetFloat("maxSpawnBuff", spawnTrigger.maxSpawnBuff / 1.6f);
+            PlayerPrefs.SetFloat("minSpawnCoin", spawnTrigger.minSpawnCoin / 1.6f);
+            PlayerPrefs.SetFloat("maxSpawnCoin", spawnTrigger.maxSpawnCoin / 1.6f);
+        } else {
             PlayerPrefs.SetFloat("GameSpeed", Instance.GameSpeed);
+            PlayerPrefs.SetFloat("minSpawnObstacle", spawnTrigger.minSpawnObstacle);
+            PlayerPrefs.SetFloat("maxSpawnObstacle", spawnTrigger.maxSpawnObstacle);
+            PlayerPrefs.SetFloat("minSpawnBuff", spawnTrigger.minSpawnBuff);
+            PlayerPrefs.SetFloat("maxSpawnBuff", spawnTrigger.maxSpawnBuff);
+            PlayerPrefs.SetFloat("minSpawnCoin", spawnTrigger.minSpawnCoin);
+            PlayerPrefs.SetFloat("maxSpawnCoin", spawnTrigger.maxSpawnCoin);
+        }
 
         string saveObjects = "";
         foreach(ObjectIDPair pair in Instance.CurrObjects)

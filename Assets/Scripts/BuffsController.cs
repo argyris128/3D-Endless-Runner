@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class BuffsController : MonoBehaviour
 {
     private MeshRenderer playerRenderer;
+    private SpawnTrigger spawnTrigger;
     public enum Buff
     {
         Shield, SlowMo, SpeedUp, Magnet
@@ -89,6 +90,7 @@ public class BuffsController : MonoBehaviour
     void Start()
     {
         playerRenderer = transform.Find("Body").GetComponent<MeshRenderer>();
+        spawnTrigger = GetComponent<SpawnTrigger>();
     }
 
 
@@ -189,13 +191,17 @@ public class BuffsController : MonoBehaviour
     {
         buffsUI.SetActive(true);
         SlowmoActive = true;
-        GameManager.Instance.GameSpeed /= 2f;
+
+        GameManager.Instance.GameSpeed /= 1.6f;
+        spawnTrigger.MultiplyTimers(1.6f);     
 
         buffsSlider.StartTimer(15f);
         yield return new WaitForSeconds(15f - buffTimer);
 
         SlowmoActive = false;
-        GameManager.Instance.GameSpeed *= 2f;
+        GameManager.Instance.GameSpeed *= 1.6f;
+        spawnTrigger.DivideTimers(1.6f);   
+
         buffsUI.SetActive(false);
         currentBuffCoroutine = null;
         Buffs.Dequeue();
@@ -206,13 +212,17 @@ public class BuffsController : MonoBehaviour
     {
         buffsUI.SetActive(true);
         SpeedupActive = true;
-        GameManager.Instance.GameSpeed *= 1.5f;
+
+        GameManager.Instance.GameSpeed *= 1.4f;
+        spawnTrigger.DivideTimers(1.4f);      
 
         buffsSlider.StartTimer(7f);
         yield return new WaitForSeconds(7f - buffTimer);
 
         SpeedupActive = false;
-        GameManager.Instance.GameSpeed /= 1.5f;
+        GameManager.Instance.GameSpeed /= 1.4f;
+        spawnTrigger.MultiplyTimers(1.4f);  
+
         buffsUI.SetActive(false);
         currentBuffCoroutine = null;
         Buffs.Dequeue();
